@@ -39,6 +39,10 @@ Participations 등) 정보를 보여주는 서비스 입니다.
     - color 하나 넣는데도 클래스 명이 다 다름 ㅠㅠ
     - https://getbootstrap.com/docs/4.0/utilities/colors/
 
+4. GitHub API Personal access token 
+    - 이것을 발급받고 localhost에서는 써도 괜찮은데 => github에 올리려고 한다면??
+    - 오류가 발생함 
+    - Github 내에서 보안 문제 때문에 스스로 삭제하는 경우가 발생 
 
 ## 추가 개발 사항 
 
