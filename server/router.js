@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Data = require('./data.js');
 const axios = require('axios');
-const FormData = require('form-data');
-let notidata = new FormData();
-notidata.append('IMHOJEONG', '767e1c3d74c9be0757786e901516534e63b3e53a');
 
 let configCodeFrequencyURL = 'https://api.github.com/repos/IMHOJEONG/CDP_Project3/stats/code_frequency';
 let configParticipationURL = 'https://api.github.com/repos/IMHOJEONG/CDP_Project3/stats/participation';
@@ -15,10 +12,8 @@ let configCodeFrequency = {
     url: configCodeFrequencyURL,
     headers: { 
       'Accept': 'application/vnd.github.v3+json', 
-      'Authorization': 'Basic SU1IT0pFT05HOjc2N2UxYzNkNzRjOWJlMDc1Nzc4NmU5MDE1MTY1MzRlNjNiM2U1M2E=', 
-      ...notidata.getHeaders()
-    },
-    data : notidata
+      'Authorization': 'Basic SU1IT0pFT05HOjZiMTY4OGRiNDU3ZGQzNjM0YmVkOGQ4ZjRmMjU5ZmJhMTA5Nzc4NDg=', 
+    }
   };
 
 let configParticipation = {
@@ -26,10 +21,8 @@ let configParticipation = {
     url: configParticipationURL,
     headers: { 
       'Accept': 'application/vnd.github.v3+json', 
-      'Authorization': 'Basic SU1IT0pFT05HOjc2N2UxYzNkNzRjOWJlMDc1Nzc4NmU5MDE1MTY1MzRlNjNiM2U1M2E=', 
-      ...notidata.getHeaders()
-    },
-    data : notidata
+      'Authorization': 'Basic SU1IT0pFT05HOjZiMTY4OGRiNDU3ZGQzNjM0YmVkOGQ4ZjRmMjU5ZmJhMTA5Nzc4NDg=', 
+    }
 };
 
 
@@ -38,17 +31,15 @@ let configRepos =  {
     url: configReposURL,
     headers: { 
       'Accept': 'application/vnd.github.v3+json', 
-      'Authorization': 'Basic SU1IT0pFT05HOjc2N2UxYzNkNzRjOWJlMDc1Nzc4NmU5MDE1MTY1MzRlNjNiM2U1M2E=', 
-      ...notidata.getHeaders()
-    },
-    data : notidata
+      'Authorization': 'Basic SU1IT0pFT05HOjZiMTY4OGRiNDU3ZGQzNjM0YmVkOGQ4ZjRmMjU5ZmJhMTA5Nzc4NDg=', 
+    }
 };
 
 
 router.get('/', (req, res) => {
     let gitrepos = { };
     let gitcheck = axios.get("https://api.github.com/repos/IMHOJEONG/CDP_Project3",{
-        "Authorization" : "767e1c3d74c9be0757786e901516534e63b3e53a",  
+        "Authorization" : "6b1688db457dd3634bed8d8f4f259fba10977848",  
     })
     .then((response)=>{
         // console.log(response.data.name);
@@ -62,7 +53,7 @@ router.get('/', (req, res) => {
 
     let users = {};
     let userscheck = axios.get("https://api.github.com/users/IMHOJEONG",{
-        "Authorization" : "767e1c3d74c9be0757786e901516534e63b3e53a",  
+        "Authorization" : "6b1688db457dd3634bed8d8f4f259fba10977848",  
     })
     .then((response)=>{
         users["html_url"] = response.data.html_url,
@@ -79,7 +70,6 @@ router.get('/', (req, res) => {
     let noti = [];
     let notifications = axios(configCodeFrequency)
     .then((response)=>{
-        //console.log(response.data);
         response.data.forEach((e)=>{
             let date1 = new Date(e[0]*1000);
             let check =date1.getFullYear()+'년' + (date1.getMonth()+1)+ "월 " + date1.getDate()+"일";
