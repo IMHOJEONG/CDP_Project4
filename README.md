@@ -1,68 +1,71 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GitHub Statistics
 
-## Available Scripts
 
-In the project directory, you can run:
+## 개요 
 
-### `yarn start`
+- GitHub API를 활용해서 현재 사용자의 GitHub 계정 정보(repository, User, Forks, Commits, URL,
+Participations 등) 정보를 보여주는 서비스 입니다.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## GitHub API
 
-### `yarn test`
+- 무조건 API 문서를 제대로 읽어보고 활용할 것 
+    - 갑자기 X-Rate-Limit 제한으로 화면에서 안 보이는 부분이 존재 가능 
+    - https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#statistics
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Time관련 API 반환 값은 Timestamp 값으로 반환되는 경우가 대부분 
+    - Timestamp에서 Date 형식으로 Human readable 하게 바꾸어주는 과정 필수 
+    - https://stackoverflow.com/questions/19485353/function-to-convert-timestamp-to-human-date-in-javascript/34900794
+    - timestamp 테스트
+        - https://timestampgenerator.com/1599350400
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 개발 시 발생한 코딩 오류 사항 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. axios 문법에 대한 기억 오류 
 
-### `yarn eject`
+- https://stackoverflow.com/questions/52017939/nodejs-axios-error-the-url-argument-must-be-of-type-string-received-typ
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. GitHub API의 Rate limit 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 인증하지 않고 사용하면 60번 호출/1hour 
+    - https://developer.github.com/v3/#rate-limiting
+- 인증하고 사용하면 5000번/1hour
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3. BootStrap class 문제 
+    - 이 부분은 Bootstrap class를 공부해서 활용해야 하지만, 오히려 HTML, CSS 기본 문법으로 충분히 작성할 수 있을 듯 합니다.
+    - color 하나 넣는데도 클래스 명이 다 다름 ㅠㅠ
+    - https://getbootstrap.com/docs/4.0/utilities/colors/
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 추가 개발 사항 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 현재는 정적 페이지를 bootstrap 4를 이용해서 예제를 참고해 작성한 상태입니다. 
+    - create-react-app 코드 디렉토리 구성으로 되어 있어서 React로 다시 개발해 볼 수 있을 것입니다. 
 
-### Code Splitting
+- 현재 외부 무료 클라우드 DB를 이용해서 MongoDB를 붙여둔 상태
+    - 음... 정작 무엇을 DB에 저장할 지 몰라서 붙여두고 ㄲ
+    - DB까지 공부 목적으로만 사용한다면 충분히 유용한 사이트 입니다. 
+    - https://www.clever-cloud.com/
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
+## 참고 사항 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- Bootstrap 4.0
+   - https://getbootstrap.com/docs/4.0/getting-started/introduction/
 
-### Making a Progressive Web App
+   - 이 예제를 활용해서 구현했습니다. 
+   - https://startbootstrap.com/previews/sb-admin-2/
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- fontawesome
+    - https://fontawesome.com/v4.7.0/icon/link
 
-### Advanced Configuration
+    - font나 아이콘 같은 것들을 필요할 때 쉽게 사용할 수 있는 장점이 있음 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## 사용한 기술 
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Bootstrap
+- Node.js 
+- MongoDB

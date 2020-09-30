@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Data = require('./data.js');
 const axios = require('axios');
+let encodedAuth = 'IMHOJEONG:3e90cb17dca31b911657b5c61352b09657af8c74'.toString('base64');
 
 let configCodeFrequencyURL = 'https://api.github.com/repos/IMHOJEONG/CDP_Project3/stats/code_frequency';
 let configParticipationURL = 'https://api.github.com/repos/IMHOJEONG/CDP_Project3/stats/participation';
@@ -12,7 +13,7 @@ let configCodeFrequency = {
     url: configCodeFrequencyURL,
     headers: { 
       'Accept': 'application/vnd.github.v3+json', 
-      'Authorization': 'Basic SU1IT0pFT05HOjZiMTY4OGRiNDU3ZGQzNjM0YmVkOGQ4ZjRmMjU5ZmJhMTA5Nzc4NDg=', 
+      'Authorization': `Basic ${encodedAuth}`, 
     }
   };
 
@@ -21,7 +22,7 @@ let configParticipation = {
     url: configParticipationURL,
     headers: { 
       'Accept': 'application/vnd.github.v3+json', 
-      'Authorization': 'Basic SU1IT0pFT05HOjZiMTY4OGRiNDU3ZGQzNjM0YmVkOGQ4ZjRmMjU5ZmJhMTA5Nzc4NDg=', 
+      'Authorization': `Basic ${encodedAuth}`, 
     }
 };
 
@@ -31,7 +32,7 @@ let configRepos =  {
     url: configReposURL,
     headers: { 
       'Accept': 'application/vnd.github.v3+json', 
-      'Authorization': 'Basic SU1IT0pFT05HOjZiMTY4OGRiNDU3ZGQzNjM0YmVkOGQ4ZjRmMjU5ZmJhMTA5Nzc4NDg=', 
+      'Authorization': `Basic ${encodedAuth}`, 
     }
 };
 
@@ -70,6 +71,7 @@ router.get('/', (req, res) => {
     let noti = [];
     let notifications = axios(configCodeFrequency)
     .then((response)=>{
+        // console.log(response.data);
         response.data.forEach((e)=>{
             let date1 = new Date(e[0]*1000);
             let check =date1.getFullYear()+'년' + (date1.getMonth()+1)+ "월 " + date1.getDate()+"일";
